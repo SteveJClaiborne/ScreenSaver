@@ -1,0 +1,150 @@
+﻿using System;
+using System.Windows;
+using System.IO;
+using System.Collections.Generic;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Threading;
+using System.Windows.Forms;
+using System.Drawing.Imaging;
+
+namespace ScreenSaver
+{
+    public partial class Form1 : Form
+    {
+        private Thread ReaderThread;
+        List<string> PhotoList=null; 
+        static bool Paused=false;
+        //MouseHook mh;
+        public Form1()
+        {
+            InitializeComponent();
+            //mh = new MouseHook();
+            //mh.SetHook();
+            //mh.MouseMoveEvent  += OnMouseMove;
+            //mh.MouseClickEvent += OnMouseEvent;
+            StartDisplay();
+            SetFullScreen();
+        }
+
+        private void GoLeftButton(object sender, EventArgs e){
+            PauseCheckbox.Checked=true;
+            PauseCheckboxClicked(null,null);
+        }
+        private void GoRightButton(object sender, EventArgs e){
+            PauseCheckbox.Checked=true;
+            PauseCheckboxClicked(null,null);
+        }
+
+        private void ExitScreenSaver(object sender, EventArgs e){
+            System.Windows.Forms.Application.Exit();
+        }
+
+        public void StartDisplay() {
+            if (ReaderThread == null)
+            {
+                ReaderThread = new Thread(ReadImages);
+                ReaderThread.Priority = ThreadPriority.Normal;
+                ReaderThread.IsBackground = true;
+                ReaderThread.Name = "Reader";
+                ReaderThread.Start();
+            }
+        }
+
+        private void SetFullScreen() {
+            this.TopMost = false;
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
+
+            //this.HeatmapPBox.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
+            this.PictureFrame.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right);
+            this.Opacity=1.0;
+        }
+
+        private delegate void DisplayImageDelegate(string ImageName);
+        private void DisplayImage(string ImageName){
+            if (this.InvokeRequired){
+              object[] args = new object[] { ImageName };
+              this.BeginInvoke(new DisplayImageDelegate(DisplayImage), args);
+              return;
+            }
+            //float ImageWidth     = PictureFrame.Width;
+            //float ImageHeight    = PictureFrame.Height;
+            //float ImageWidth=System.Windows.SystemParameters.FullPrimaryScreenWidth;
+            float ImageWidth =Screen.PrimaryScreen.Bounds.Width;
+            float ImageHeight=Screen.PrimaryScreen.Bounds.Height;
+            Rectangle ImageRect  = new Rectangle(0,0,(int)ImageWidth,(int)ImageHeight);
+            //InterpolationMode IMode = InterpolationMode.HighQualityBilinear;
+            Bitmap scaledCanvas  = new Bitmap((int)ImageWidth,(int)ImageHeight,PixelFormat.Format24bppRgb);
+
+            Bitmap bmp = new Bitmap(ImageName);
+            Graphics g=Graphics.FromImage(scaledCanvas);
+            //g.InterpolationMode = IMode;
+            g.DrawImage(bmp,ImageRect);
+            PictureFrame.Image=scaledCanvas;
+            FileNameTextBox.Text=ImageName;
+        }
+
+        private void ReadImages() {
+        	GetFileList();
+            while(true) {
+               DisplayPhotos(PhotoList);
+            }
+        }
+
+        private void PauseCheckboxClicked(object sender, EventArgs e) {
+            if(PauseCheckbox.Checked)
+              Paused=true;
+            else
+              Paused=false;
+        }
+
+        Point MouseXY;
+        private void OnMouseMove(object sender, System.Windows.Forms.MouseEventArgs e) {
+          if (!MouseXY.IsEmpty) {
+            //if (MouseXY != new Point(e.X, e.Y))
+            //   Close();
+          }
+          MouseXY = new Point(e.X, e.Y);
+        }
+        private void OnMouseEvent(object sender, System.Windows.Forms.MouseEventArgs e) {
+          if (!MouseXY.IsEmpty) {
+            //if (MouseXY != new Point(e.X, e.Y))
+            //  Close();
+            //if (e.Clicks > 0)
+            //  Close();
+          }
+          MouseXY = new Point(e.X, e.Y);
+        }
+
+        private static Random rand = new Random();
+	    private void GetFileList() {
+   	      string path = "./";
+          //var files = new DirectoryInfo(path).GetFiles(path).OrderByDescending(f => f.LastWriteTime).First();
+          //string rootdir = "/mnt/c/Users/steve.c/Pictures";
+          string rootdir = @"c:\Users\steve.c\Pictures";
+          string Photos="*.jpg";
+ 
+          string[] PhotoArray;
+          PhotoArray=Directory.GetFileSystemEntries(rootdir, Photos, SearchOption.AllDirectories);
+          PhotoList =PhotoArray.ToList<string>();
+          PhotoList = PhotoList.OrderBy(a => rand.Next()).ToList();
+          System.Diagnostics.Debug.WriteLine(String.Join(Environment.NewLine, PhotoList));
+        }
+
+        int ImageIndex=0;
+        private void DisplayPhotos(List<string> PhotoList) {
+   	      foreach (string file in PhotoList) {
+                //Console.WriteLine(file);
+              while(Paused)
+                Thread.Sleep(1000);
+                
+              System.Diagnostics.Debug.WriteLine(file);
+              DisplayImage(file);
+              Thread.Sleep(1500);
+   	      }
+       }
+    }
+
+}
