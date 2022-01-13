@@ -68,9 +68,17 @@ namespace ScreenSaver
             this.TopMost = false;
             this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
+            float ImageWidth =Screen.PrimaryScreen.Bounds.Width;
+            float ImageHeight=Screen.PrimaryScreen.Bounds.Height;
+            this.PictureFrame.Width  = (int)ImageWidth;
+            this.PictureFrame.Height = (int)ImageHeight;
 
             //this.HeatmapPBox.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
-            this.PictureFrame.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right);
+            this.PictureFrame.Anchor = (AnchorStyles.Top | AnchorStyles.Left);
+            //this.PictureFrame.SizeMode=PictureBoxSizeMode.StretchImage;
+            this.PictureFrame.SizeMode=PictureBoxSizeMode.Normal;
+            //this.PictureFrame.SizeMode=PictureBoxSizeMode.AutoSize;
+            //this.PictureFrame.SizeMode=PictureBoxSizeMode.Zoom;
             this.Opacity=1.0;
         }
 
@@ -93,21 +101,50 @@ namespace ScreenSaver
               this.BeginInvoke(new DisplayImageDelegate(DisplayImage), args);
               return;
             }
-            //float ImageWidth     = PictureFrame.Width;
-            //float ImageHeight    = PictureFrame.Height;
-            //float ImageWidth=System.Windows.SystemParameters.FullPrimaryScreenWidth;
-            float ImageWidth =Screen.PrimaryScreen.Bounds.Width;
-            float ImageHeight=Screen.PrimaryScreen.Bounds.Height;
-            Rectangle ImageRect  = new Rectangle(0,0,(int)ImageWidth,(int)ImageHeight);
-            //InterpolationMode IMode = InterpolationMode.HighQualityBilinear;
-            Bitmap scaledCanvas  = new Bitmap((int)ImageWidth,(int)ImageHeight,PixelFormat.Format24bppRgb);
 
-            //Bitmap bmp = new Image.FromFile(ImageName);
+            //InterpolationMode IMode = InterpolationMode.HighQualityBilinear;
             Image bmp = Image.FromFile(ImageName);
+
+            if(bmp.Width<bmp.Height) {
+               bmp.RotateFlip(RotateFlipType.Rotate270FlipNone);
+            }
+
+            float ImageWidth     = bmp.Width;
+            float ImageHeight    = bmp.Height;
+            //System.Diagnostics.Debug.WriteLine("Aspect Ratio={0}",(double)bmp.Width/bmp.Height);
+
+            if(Screen.PrimaryScreen.Bounds.Width<bmp.Width && Screen.PrimaryScreen.Bounds.Height<bmp.Height) {
+                float Ratio1= (float)Screen.PrimaryScreen.Bounds.Width/bmp.Width;
+                float Ratio2= (float)Screen.PrimaryScreen.Bounds.Height/bmp.Height;
+                float Ratio = Math.Min(Ratio1,Ratio2);
+                ImageWidth *= Ratio;
+                ImageHeight*= Ratio;
+                //System.Diagnostics.Debug.WriteLine("New Aspect Ratio={0}",(double)ImageWidth/ImageHeight);
+            } else if(Screen.PrimaryScreen.Bounds.Width<bmp.Width) {
+                float Ratio = (float)Screen.PrimaryScreen.Bounds.Width/bmp.Width;
+                ImageWidth  = Screen.PrimaryScreen.Bounds.Width;
+                ImageHeight*= Ratio;
+            } else if(Screen.PrimaryScreen.Bounds.Height<bmp.Height){
+                float Ratio = (float)Screen.PrimaryScreen.Bounds.Height/bmp.Height;
+                ImageWidth *= Ratio;
+                ImageHeight = Screen.PrimaryScreen.Bounds.Height;
+            }
+
+            float AnchorX        = (float)(Screen.PrimaryScreen.Bounds.Width/2.0f) - (ImageWidth/2.0f);
+            float AnchorY        = (float)(Screen.PrimaryScreen.Bounds.Height*0.05);
+
+            PictureFrame.Location= new Point((int)AnchorX,(int)AnchorY);
+
+            PictureFrame.Width   = (int)ImageWidth;
+            PictureFrame.Height  = (int)ImageHeight;
+            PictureFrame.BorderStyle = BorderStyle.Fixed3D;
+            Rectangle ImageRect  = new Rectangle(0,0,(int)ImageWidth,(int)ImageHeight);
+            Bitmap scaledCanvas  = new Bitmap((int)ImageWidth,(int)ImageHeight,PixelFormat.Format24bppRgb);
             Graphics g=Graphics.FromImage(scaledCanvas);
             //g.InterpolationMode = IMode;
             g.DrawImage(bmp,ImageRect);
             bmp.Dispose();
+
             PictureFrame.Image=scaledCanvas;
             FileNameTextBox.Text=ImageName;
 

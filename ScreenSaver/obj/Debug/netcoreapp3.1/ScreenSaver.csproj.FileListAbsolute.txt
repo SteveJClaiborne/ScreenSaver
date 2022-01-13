@@ -5,6 +5,7 @@ C:\projects\ScreenSaver\ScreenSaver\bin\Debug\netcoreapp3.1\ScreenSaver.runtimec
 C:\projects\ScreenSaver\ScreenSaver\bin\Debug\netcoreapp3.1\ScreenSaver.dll
 C:\projects\ScreenSaver\ScreenSaver\bin\Debug\netcoreapp3.1\ScreenSaver.pdb
 C:\projects\ScreenSaver\ScreenSaver\bin\Debug\netcoreapp3.1\Interop.Shell32.dll
+C:\projects\ScreenSaver\ScreenSaver\obj\Debug\netcoreapp3.1\ScreenSaver.csproj.AssemblyReference.cache
 C:\projects\ScreenSaver\ScreenSaver\obj\Debug\netcoreapp3.1\Interop.Shell32.dll
 C:\projects\ScreenSaver\ScreenSaver\obj\Debug\netcoreapp3.1\ScreenSaver.csproj.ResolveComReference.cache
 C:\projects\ScreenSaver\ScreenSaver\obj\Debug\netcoreapp3.1\ScreenSaver.Form1.resources
@@ -17,4 +18,3 @@ C:\projects\ScreenSaver\ScreenSaver\obj\Debug\netcoreapp3.1\ScreenSaver.csproj.C
 C:\projects\ScreenSaver\ScreenSaver\obj\Debug\netcoreapp3.1\ScreenSaver.dll
 C:\projects\ScreenSaver\ScreenSaver\obj\Debug\netcoreapp3.1\ScreenSaver.pdb
 C:\projects\ScreenSaver\ScreenSaver\obj\Debug\netcoreapp3.1\ScreenSaver.genruntimeconfig.cache
-C:\projects\ScreenSaver\ScreenSaver\obj\Debug\netcoreapp3.1\ScreenSaver.csproj.AssemblyReference.cache

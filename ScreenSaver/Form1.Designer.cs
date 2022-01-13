@@ -44,11 +44,11 @@ namespace ScreenSaver
             // 
             // PictureFrame
             // 
-            this.PictureFrame.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.PictureFrame.Location = new System.Drawing.Point(0, 223);
+            this.PictureFrame.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PictureFrame.Location = new System.Drawing.Point(11, 110);
+            this.PictureFrame.Margin = new System.Windows.Forms.Padding(2);
             this.PictureFrame.Name = "PictureFrame";
-            this.PictureFrame.Size = new System.Drawing.Size(1954, 875);
-            this.PictureFrame.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.PictureFrame.Size = new System.Drawing.Size(1357, 614);
             this.PictureFrame.TabIndex = 0;
             this.PictureFrame.TabStop = false;
             // 
@@ -56,10 +56,11 @@ namespace ScreenSaver
             // 
             this.PauseCheckbox.AutoSize = true;
             this.PauseCheckbox.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.PauseCheckbox.Location = new System.Drawing.Point(12, 54);
+            this.PauseCheckbox.Location = new System.Drawing.Point(8, 32);
+            this.PauseCheckbox.Margin = new System.Windows.Forms.Padding(2);
             this.PauseCheckbox.Name = "PauseCheckbox";
-            this.PauseCheckbox.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            this.PauseCheckbox.Size = new System.Drawing.Size(133, 49);
+            this.PauseCheckbox.Padding = new System.Windows.Forms.Padding(4, 0, 0, 0);
+            this.PauseCheckbox.Size = new System.Drawing.Size(91, 34);
             this.PauseCheckbox.TabIndex = 2;
             this.PauseCheckbox.Text = "Pause";
             this.PauseCheckbox.UseVisualStyleBackColor = true;
@@ -69,10 +70,11 @@ namespace ScreenSaver
             // 
             this.ExitButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ExitButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ExitButton.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ExitButton.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ExitButton.Location = new System.Drawing.Point(0, 0);
+            this.ExitButton.Margin = new System.Windows.Forms.Padding(2);
             this.ExitButton.Name = "ExitButton";
-            this.ExitButton.Size = new System.Drawing.Size(1954, 46);
+            this.ExitButton.Size = new System.Drawing.Size(1589, 33);
             this.ExitButton.TabIndex = 3;
             this.ExitButton.Text = "Exit";
             this.ExitButton.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -82,9 +84,10 @@ namespace ScreenSaver
             // RightArrowButton
             // 
             this.RightArrowButton.Image = ((System.Drawing.Image)(resources.GetObject("RightArrowButton.Image")));
-            this.RightArrowButton.Location = new System.Drawing.Point(380, 61);
+            this.RightArrowButton.Location = new System.Drawing.Point(266, 37);
+            this.RightArrowButton.Margin = new System.Windows.Forms.Padding(2);
             this.RightArrowButton.Name = "RightArrowButton";
-            this.RightArrowButton.Size = new System.Drawing.Size(79, 34);
+            this.RightArrowButton.Size = new System.Drawing.Size(81, 20);
             this.RightArrowButton.TabIndex = 4;
             this.RightArrowButton.UseVisualStyleBackColor = true;
             this.RightArrowButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.GoRightButton);
@@ -92,9 +95,10 @@ namespace ScreenSaver
             // LeftArrowButton
             // 
             this.LeftArrowButton.Image = ((System.Drawing.Image)(resources.GetObject("LeftArrowButton.Image")));
-            this.LeftArrowButton.Location = new System.Drawing.Point(299, 61);
+            this.LeftArrowButton.Location = new System.Drawing.Point(191, 37);
+            this.LeftArrowButton.Margin = new System.Windows.Forms.Padding(2);
             this.LeftArrowButton.Name = "LeftArrowButton";
-            this.LeftArrowButton.Size = new System.Drawing.Size(79, 34);
+            this.LeftArrowButton.Size = new System.Drawing.Size(73, 20);
             this.LeftArrowButton.TabIndex = 5;
             this.LeftArrowButton.UseVisualStyleBackColor = true;
             this.LeftArrowButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.GoLeftButton);
@@ -102,9 +106,10 @@ namespace ScreenSaver
             // DeleteButton
             // 
             this.DeleteButton.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.DeleteButton.Location = new System.Drawing.Point(146, 52);
+            this.DeleteButton.Location = new System.Drawing.Point(102, 31);
+            this.DeleteButton.Margin = new System.Windows.Forms.Padding(2);
             this.DeleteButton.Name = "DeleteButton";
-            this.DeleteButton.Size = new System.Drawing.Size(122, 51);
+            this.DeleteButton.Size = new System.Drawing.Size(85, 35);
             this.DeleteButton.TabIndex = 6;
             this.DeleteButton.Text = "Delete";
             this.DeleteButton.UseVisualStyleBackColor = true;
@@ -113,10 +118,10 @@ namespace ScreenSaver
             // ImageSpeed
             // 
             this.ImageSpeed.LargeChange = 1;
-            this.ImageSpeed.Location = new System.Drawing.Point(479, 55);
+            this.ImageSpeed.Location = new System.Drawing.Point(357, 32);
             this.ImageSpeed.Maximum = 10;
             this.ImageSpeed.Name = "ImageSpeed";
-            this.ImageSpeed.Size = new System.Drawing.Size(120, 47);
+            this.ImageSpeed.Size = new System.Drawing.Size(84, 34);
             this.ImageSpeed.TabIndex = 7;
             this.ImageSpeed.Value = 5;
             // 
@@ -124,9 +129,10 @@ namespace ScreenSaver
             // 
             this.FileNameTextBox.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.FileNameTextBox.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.FileNameTextBox.Location = new System.Drawing.Point(0, 157);
+            this.FileNameTextBox.Location = new System.Drawing.Point(0, 849);
+            this.FileNameTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.FileNameTextBox.Name = "FileNameTextBox";
-            this.FileNameTextBox.Size = new System.Drawing.Size(1954, 66);
+            this.FileNameTextBox.Size = new System.Drawing.Size(1589, 41);
             this.FileNameTextBox.TabIndex = 8;
             this.FileNameTextBox.Text = "";
             // 
@@ -139,9 +145,10 @@ namespace ScreenSaver
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1954, 1098);
+            this.BackColor = System.Drawing.Color.Gainsboro;
+            this.ClientSize = new System.Drawing.Size(1589, 890);
             this.Controls.Add(this.FileNameTextBox);
             this.Controls.Add(this.ImageSpeed);
             this.Controls.Add(this.DeleteButton);
@@ -150,8 +157,9 @@ namespace ScreenSaver
             this.Controls.Add(this.ExitButton);
             this.Controls.Add(this.PauseCheckbox);
             this.Controls.Add(this.PictureFrame);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Steve\'s Screen Saver";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.PictureFrame)).EndInit();
             this.ResumeLayout(false);
